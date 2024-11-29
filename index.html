@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Valor: Ponle Precio a tus Servicios</title>
+    <style>
+        body {
+            font-family: 'Arimo', sans-serif;
+            background-color: #E5EBF4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #22C0DC;
+        }
+        label {
+            display: block;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            margin-top: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #01BD39;
+            color: #fff;
+            font-size: 1rem;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            display: block;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #019c30;
+        }
+        .results {
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: #f4f9ff;
+            border: 1px solid #cce0f5;
+            border-radius: 4px;
+        }
+        .cta {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .cta p {
+            color: #22C0DC;
+            font-size: 1.2rem;
+        }
+        .cta a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Valor</h1>
+        <h2>Ponle Precio a tus Servicios</h2>
+        <p>Completa los campos para calcular una tarifa justa y profesional para tus servicios.</p>
+
+        <form id="calculatorForm">
+            <label for="expenses">Gastos mensuales (en $):</label>
+            <input type="number" id="expenses" placeholder="Por ejemplo, 1000" required>
+
+            <label for="hours">Horas trabajadas al mes:</label>
+            <input type="number" id="hours" placeholder="Por ejemplo, 160" required>
+
+            <label for="expertise">Nivel de especialización (1-10):</label>
+            <input type="number" id="expertise" min="1" max="10" placeholder="1 = Básico, 10 = Experto" required>
+
+            <label for="value">Valor añadido (en %):</label>
+            <input type="number" id="value" min="0" max="100" placeholder="Por ejemplo, 20 para un 20%" required>
+
+            <button type="button" onclick="calculateRate()">Calcular Tarifa</button>
+        </form>
+
+        <div class="results" id="results" style="display: none;">
+            <h2>Resultados</h2>
+            <p><strong>Tarifa base por hora:</strong> $<span id="baseRate"></span></p>
+            <p><strong>Tarifa recomendada considerando valor añadido:</strong> $<span id="recommendedRate"></span></p>
+            <p>Sugerencia: Usa estas tarifas como referencia para comunicar claramente el valor de tus servicios. No temas justificar tu precio destacando tus habilidades únicas y resultados probados.</p>
+        </div>
+
+        <div class="cta">
+            <p>Descubre el Secreto de Reinventarse Profesionalmente en Solo 14 Días</p>
+            <a href="https://klicana.work/Ecpzgd" target="_blank">
+                <button>SÍ! INSCRIBIRME EN “ASISTENTE VIRTUAL EN 14 DÍAS”</button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function calculateRate() {
+            const expenses = parseFloat(document.getElementById('expenses').value);
+            const hours = parseFloat(document.getElementById('hours').value);
+            const expertise = parseInt(document.getElementById('expertise').value);
+            const value = parseFloat(document.getElementById('value').value) / 100;
+
+            if (expenses > 0 && hours > 0 && expertise >= 1 && expertise <= 10 && value >= 0) {
+                const baseRate = (expenses / hours).toFixed(2);
+                const recommendedRate = (baseRate * (1 + value + (expertise / 10))).toFixed(2);
+
+                document.getElementById('baseRate').textContent = baseRate;
+                document.getElementById('recommendedRate').textContent = recommendedRate;
+                document.getElementById('results').style.display = 'block';
+            } else {
+                alert('Por favor, completa todos los campos con valores válidos.');
+            }
+        }
+    </script>
+</body>
+</html>
